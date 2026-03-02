@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siddhi Parmar | Systems & Dev Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #3a7bd5;
+            --bg: #0b0f1a;
+            --sidebar-bg: #111827;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --accent: #6366f1;
+            --text: #f8fafc;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-family: 'Inter', sans-serif; 
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        nav {
+            width: 280px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .profile-zone { text-align: center; margin-bottom: 40px; }
+        .profile-zone h1 { font-size: 1.5rem; letter-spacing: -1px; margin-top: 15px; }
+        .status-dot { width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block; margin-right: 5px; box-shadow: 0 0 10px #10b981; }
+
+        .nav-links { list-style: none; margin-top: 20px; }
+        .nav-links li { padding: 12px 15px; border-radius: 8px; margin-bottom: 5px; cursor: pointer; transition: 0.3s; color: #94a3b8; font-weight: 600; }
+        .nav-links li:hover { background: rgba(255,255,255,0.05); color: var(--primary); }
+        .nav-links li i { margin-right: 10px; width: 20px; }
+
+        /* Main Content Area */
+        main { margin-left: 280px; flex-grow: 1; padding: 40px; width: calc(100% - 280px); }
+
+        .dashboard-header { 
+            display: grid; 
+            grid-template-columns: 2fr 1fr; 
+            gap: 20px; 
+            margin-bottom: 40px; 
+        }
+
+        /* Bento-style Cards */
+        .bento-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-bento {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-left: 5px solid var(--primary);
+        }
+
+        /* Skill Matrix Section */
+        .skills-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .skill-chip {
+            background: rgba(0, 210, 255, 0.05);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        /* Grid for Experience & Education */
+        .stuffy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card { text-align: center; }
+        .stat-val { font-size: 2.5rem; font-weight: 900; color: var(--primary); display: block; }
+        .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #64748b; }
+
+        /* Project & Cert Rows */
+        .dense-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        h2 { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; color: #94a3b8; display: flex; align-items: center; gap: 10px; }
+        h2::before { content: "//"; color: var(--primary); }
+
+        .project-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+        .project-item:hover { border-color: var(--primary); background: rgba(255,255,255,0.05); }
+
+        @media (max-width: 1000px) {
+            nav { width: 80px; padding: 20px 10px; }
+            nav span, .profile-zone h1, .profile-zone p { display: none; }
+            main { margin-left: 80px; width: calc(100% - 80px); }
+            .stuffy-grid, .dense-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="profile-zone">
+        <div style="width: 80px; height: 80px; background: var(--primary); margin: auto; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 900; color: var(--bg);">SP</div>
+        <h1>Siddhi Parmar</h1>
+        <p style="font-size: 0.8rem; color: #64748b; margin-top: 5px;"><span class="status-dot"></span> Available for Hire</p>
+    </div>
+    <ul class="nav-links">
+        <li><i class="fas fa-th-large"></i> <span>Dashboard</span></li>
+        <li><i class="fas fa-code"></i> <span>Projects</span></li>
+        <li><i class="fas fa-certificate"></i> <span>Credentials</span></li>
+        <li><i class="fas fa-envelope"></i> <span>Contact</span></li>
+    </ul>
+    <div style="margin-top: auto; font-size: 0.7rem; color: #475569;">
+        <p>v2.0.26_stable</p>
+        <p>Built with Python Spirit</p>
+    </div>
+</nav>
+
+<main>
+    <div class="dashboard-header">
+        <div class="bento-card hero-bento">
+            <h2 style="color: white; border: none;">Developer Summary</h2>
+            <p style="font-size: 1.1rem; color: #cbd5e1;">Final year BCA Student & Python Developer Intern at <strong>Dreamspot IT Academy</strong>. Specializing in backend automation, data analytics, and prompt engineering.</p>
+            <div class="skills-matrix">
+                <div class="skill-chip">Python 3.x</div>
+                <div class="skill-chip">Pandas/NumPy</div>
+                <div class="skill-chip">SQL</div>
+                <div class="skill-chip">Gen AI</div>
+                <div class="skill-chip">HTML/CSS/JS</div>
+                <div class="skill-chip">Rest APIs</div>
+            </div>
+        </div>
+        <div class="bento-card stat-card">
+            <span class="stat-label">Academic Standing</span>
+            <span class="stat-val">75%<span style="font-size: 1rem;">+</span></span>
+            <p style="font-size: 0.8rem; color: #64748b;">BCA Aggregate Score</p>
+            <hr style="margin: 15px 0; border: 0; border-top: 1px solid var(--border);">
+            <div style="text-align: left; font-size: 0.8rem;">
+                <p><i class="fas fa-check-circle" style="color: var(--primary);"></i> 6/6 Semesters Clear</p>
+                <p><i class="fas fa-check-circle" style="color: var(--primary);"></i> Top Tier Internship</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="stuffy-grid">
+        <div class="bento-card">
+            <h2>Current Role</h2>
+            <h3 style="color: var(--primary); font-size: 1rem;">Python Intern</h3>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 5px;">Dreamspot IT Academy</p>
+            <p style="font-size: 0.85rem; margin-top: 10px;">Focused on automating data processing pipelines and backend logic optimization.</p>
+        </div>
+        <div class="bento-card">
+            <h2>Education</h2>
+            <h3 style="color: var(--primary); font-size: 1rem;">BCA Degree</h3>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 5px;">University Candidate</p>
+            <p style="font-size: 0.85rem; margin-top: 10px;">Final Semester student with deep focus on Software Architecture.</p>
+        </div>
+        <div class="bento-card">
+            <h2>Social Connectivity</h2>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <div class="skill-chip" style="flex: 1; cursor: pointer;"><i class="fab fa-linkedin"></i></div>
+                <div class="skill-chip" style="flex: 1; cursor: pointer;"><i class="fab fa-github"></i></div>
+                <div class="skill-chip" style="flex: 1; cursor: pointer;"><i class="fas fa-envelope"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dense-row">
+        <section>
+            <h2>System Projects</h2>
+            <div class="project-item">
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="font-weight: 700; color: var(--primary);">Cozy Cup Coffee</span>
+                    <span style="font-size: 0.7rem; background: var(--secondary); padding: 2px 8px; border-radius: 4px;">WEB-UI</span>
+                </div>
+                <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 8px;">Responsive E-commerce front-end with menu logic and user contact modules.</p>
+            </div>
+            <div class="project-item">
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="font-weight: 700; color: var(--primary);">Data Auto-Tool</span>
+                    <span style="font-size: 0.7rem; background: #8b5cf6; padding: 2px 8px; border-radius: 4px;">PYTHON</span>
+                </div>
+                <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 8px;">Internal Python tools for automating data processing at Dreamspot IT.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Verified Credentials</h2>
+            <div class="project-item" style="display: flex; gap: 15px; align-items: center;">
+                <i class="fas fa-microchip" style="color: #f59e0b;"></i>
+                <div>
+                    <p style="font-size: 0.85rem; font-weight: 600;">GenAI & Data Analytics</p>
+                    <p style="font-size: 0.7rem; color: #64748b;">Tata / Sololearn / SkillCaptain</p>
+                </div>
+            </div>
+            <div class="project-item" style="display: flex; gap: 15px; align-items: center;">
+                <i class="fas fa-shield-alt" style="color: #ef4444;"></i>
+                <div>
+                    <p style="font-size: 0.85rem; font-weight: 600;">Cyber & Architecture</p>
+                    <p style="font-size: 0.7rem; color: #64748b;">Deloitte / AWS Simulator</p>
+                </div>
+            </div>
+            <div class="project-item" style="display: flex; gap: 15px; align-items: center;">
+                <i class="fas fa-award" style="color: #10b981;"></i>
+                <div>
+                    <p style="font-size: 0.85rem; font-weight: 600;">ICAT Participation</p>
+                    <p style="font-size: 0.7rem; color: #64748b;">Certified National Participation</p>
+                </div>
+            </div>
+        </section>
+        <section id="terminal-section">
+    <h2>System Terminal</h2>
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+            </div>
+            <div class="terminal-title">siddhi@dev-machine: ~</div>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+            <div class="terminal-line">Welcome to Siddhi's OS v2.0.26. Type <span style="color: var(--primary)">'help'</span> to see available commands.</div>
+            <div class="terminal-input-row">
+                <span class="terminal-prompt">siddhi@dev-machine:~$</span>
+                <input type="text" id="terminal-input" autofocus autocomplete="off" spellcheck="false">
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Terminal Styles */
+    .terminal-window {
+        background: #000;
+        border: 1px solid #334155;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        font-family: 'Fira Code', monospace;
+        margin-top: 20px;
+    }
+    .terminal-header {
+        background: #1e293b;
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #334155;
+    }
+    .terminal-buttons { display: flex; gap: 8px; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .red { background: #ff5f56; }
+    .yellow { background: #ffbd2e; }
+    .green { background: #27c93f; }
+    .terminal-title { margin: auto; font-size: 0.75rem; color: #94a3b8; }
+    
+    .terminal-body {
+        padding: 20px;
+        height: 250px;
+        overflow-y: auto;
+        font-size: 0.9rem;
+        color: #10b981; /* Classic Terminal Green */
+    }
+    .terminal-line { margin-bottom: 8px; line-height: 1.4; }
+    .terminal-input-row { display: flex; align-items: center; gap: 10px; }
+    .terminal-prompt { color: var(--primary); font-weight: bold; }
+    
+    #terminal-input {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #fff;
+        font-family: inherit;
+        font-size: inherit;
+        flex-grow: 1;
+    }
+
+    /* Scrollbar for terminal */
+    .terminal-body::-webkit-scrollbar { width: 6px; }
+    .terminal-body::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+</style>
+
+<script>
+    const terminalInput = document.getElementById('terminal-input');
+    const terminalBody = document.getElementById('terminal-body');
+
+    const commands = {
+        'help': 'Available commands: [about, skills, education, contact, clear]',
+        'about': 'Siddhi Parmar: Final year BCA Student and Python Developer Intern at Dreamspot IT Academy.',
+        'skills': 'Primary: Python, SQL, Data Analytics. Secondary: HTML, CSS, JS, Prompt Engineering.',
+        'education': 'BCA @ 75%+ Aggregate Score. Currently in final semester.',
+        'contact': 'Email: siddhiparmar070@gmail.com | Location: Rajkot, Gujarat',
+        'clear': 'CLEAR'
+    };
+
+    terminalInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            const input = this.value.toLowerCase().trim();
+            const response = commands[input] || `Command not found: ${input}. Type 'help' for assistance.`;
+            
+            if (response === 'CLEAR') {
+                terminalBody.innerHTML = '';
+            } else {
+                const output = document.createElement('div');
+                output.className = 'terminal-line';
+                output.innerHTML = `<span class="terminal-prompt">siddhi@dev-machine:~$</span> ${input}<br><span style="color: #fff">${response}</span>`;
+                
+                // Insert before the input row
+                terminalBody.insertBefore(output, terminalBody.lastElementChild);
+            }
+            
+            this.value = '';
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+    });
+</script>
+<div class="system-status-bar">
+    <div class="status-item">
+        <i class="fas fa-clock"></i>
+        <span id="live-clock">00:00:00 AM</span>
+    </div>
+    <div class="status-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Rajkot, IN</span>
+    </div>
+    <div class="status-item">
+        <i class="fas fa-cloud-sun"></i>
+        <span id="weather-status">28°C / Clear</span>
+    </div>
+    <div class="status-item" style="margin-left: auto;">
+        <span class="status-pill">System: Online</span>
+    </div>
+</div>
+
+<style>
+    /* Status Bar Styles */
+    .system-status-bar {
+        display: flex;
+        gap: 25px;
+        background: var(--card-bg);
+        padding: 12px 25px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        margin-bottom: 30px;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.85rem;
+        color: var(--primary);
+        align-items: center;
+    }
+
+    .status-item { display: flex; align-items: center; gap: 8px; color: #94a3b8; }
+    .status-item i { color: var(--primary); }
+
+    .status-pill {
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    /* Animation for the "Online" pill */
+    .status-pill::before {
+        content: "";
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #10b981;
+        border-radius: 50%;
+        margin-right: 8px;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.4; }
+        100% { opacity: 1; }
+    }
+</style>
+
+<script>
+    // Live Clock Function
+    function updateClock() {
+        const now = new Date();
+        const options = { 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            second: '2-digit', 
+            hour12: true,
+            timeZone: 'Asia/Kolkata' 
+        };
+        document.getElementById('live-clock').textContent = now.toLocaleTimeString('en-IN', options);
+    }
+
+    // Weather Mock (Since real weather requires an API key)
+    // You can replace this with a real fetch call to OpenWeatherMap later!
+    function updateWeather() {
+        const conditions = ["Clear", "Sunny", "Partly Cloudy"];
+        const randomTemp = Math.floor(Math.random() * (32 - 24) + 24);
+        const condition = conditions[Math.floor(Math.random() * conditions.length)];
+        document.getElementById('weather-status').textContent = `${randomTemp}°C / ${condition}`;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+    updateWeather();
+</script>
+    </div>
+
+    <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; font-size: 0.8rem; color: #475569;">
+        [ System-ID: SP-2026 ] // All Rights Reserved // siddhi.parmar.dev
+    </footer>
+</main>
+
+</body>
+</html>
